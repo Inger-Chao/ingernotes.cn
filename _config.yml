@@ -17,7 +17,7 @@ resume-external: true
 resume-url: https://google.com/?q=my+resume
 
 markdown: kramdown
-url: http://ingernotes.cn
+url: http://www.ingernotes.cn
 # your url: http://USERNAME.github.io
 language: zh-CN
 permalink: /:title/
