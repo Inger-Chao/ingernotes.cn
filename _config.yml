@@ -32,9 +32,21 @@ permalink: /:title/
 # analytics-piwik-id: 1
 
 # if you don't want comments in your posts, leave categories empty
-disqus:
-  shortname: Inger # enter this from your disqus account
-  categories: [blog, project] # only show disqus for posts that have these categories
+# disqus:
+    # shortname: Inger # enter this from your disqus account
+    # categories: [blog, project] # only show disqus for posts that have these categories
+
+valine_comment:
+    enable: true
+    # app_id
+    leancloud_appid: JPwWXLVn2UzLBzm6WG8amCvk-gzGzoHsz
+    # app_key
+    leancloud_appkey: oV4zbzmWrpAWp0T4MwIi9PB3
+    # placeholde
+    placeholder: “ヾﾉ≧∀≦)o不要只是浏览，和作者互动吧！"
+    pageSize: 10
+    categories: [blog, project] # only show valine for posts that have these categories
+
 
 # if you don't have any of social below, comment the line
 # facebook: myfacebook
@@ -100,11 +112,11 @@ show-author: true
 animation: true
 
 plugins:
-  - jekyll-seo-tag
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-  - jekyll-admin
+- jekyll-seo-tag
+- jekyll-gist
+- jekyll-feed
+- jemoji
+- jekyll-admin
 
 jekyll-mentions:
     base_url: https://github.com
