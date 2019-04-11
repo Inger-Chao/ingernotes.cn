@@ -1,5 +1,5 @@
 ---
-title: "AI 中的 Python 核心编程基础 I"
+title: "AI 中的 Python 核心编程基础 Ⅰ"
 layout: post
 date: 2019-04-10 15:35
 tag:
