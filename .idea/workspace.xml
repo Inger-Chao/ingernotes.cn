@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3372ba27-6f81-48a3-8d38-c1e6cf24fc37" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/valine.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/valine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2019-04-10-Python-basic-notes1.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2019-04-10-Python-basic-notes1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/james.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="3372ba27-6f81-48a3-8d38-c1e6cf24fc37" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -85,7 +80,7 @@
     <session id="1948205584">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.26" value="1" />
@@ -159,7 +154,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="339">
-                <caret line="392" lean-forward="true" selection-start-line="392" selection-end-line="392" />
+                <caret line="392" selection-start-line="392" selection-end-line="392" />
               </first_editor>
               <second_editor />
             </state>
@@ -560,12 +555,12 @@
       <workItem from="1554641251605" duration="6082000" />
       <workItem from="1554785806661" duration="715000" />
       <workItem from="1554881885342" duration="14878000" />
-      <workItem from="1555000707157" duration="261000" />
+      <workItem from="1555000707157" duration="845000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49503000" />
+    <option name="totallyTimeSpent" value="50087000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -940,7 +935,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="339">
-            <caret line="392" lean-forward="true" selection-start-line="392" selection-end-line="392" />
+            <caret line="392" selection-start-line="392" selection-end-line="392" />
           </first_editor>
           <second_editor />
         </state>
