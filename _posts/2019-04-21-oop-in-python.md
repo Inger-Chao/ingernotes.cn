@@ -3,7 +3,7 @@ title: "面向对象的 Python 实现"
 layout: post
 date: 2019-04-21 22:14
 tag:
-- Software
+- Python
 category: blog
 author: ingerchao
 description: The notes of python learning
