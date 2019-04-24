@@ -211,3 +211,245 @@ if __name__ == '__main__':
 
 - 默认情况下，CRUD 操作都支持，甚至说不用创建对象都可以做到（双下划线开头的除外）。
 - 而如果对象中没有这个 Attribute，访问时会报错。
+
+#### Property
+
+设计初衷：
+
+- 代码复用：AI领域实际上并不常用， 面向对象可能更常用。
+- 延迟计算：Property 可以在不改变代码的情况下做到延迟计算
+- 更加规范的对象属性访问管理。
+
+```python
+# 场景：监控 BMI 指标，每天更新体重，隔几天看一次BMI指数
+class X:
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+        self.BMI = w/h ** 2
+def main():
+    x = X(46,1.57)
+    print(x.BMI)
+    x.w = 47
+    x.w = 48
+    x.w = 49
+    print(x.BMI)
+if __name__ == "__main__":
+    main()
+```
+
+```
+18.662014686194166
+18.662014686194166
+```
+
+由于 `__init__()`只执行一次，所以 self.BMI 一直会保持在初始化时的状态，而 BMI 是由两个成员变量计算得到的，就无法动态改变 BMI 的值。
+
+改进版（一）：
+
+```python
+# 场景：监控 BMI 指标，每天更新体重，隔几天看一次BMI指数
+class X:
+    def __init__(self, w, h):
+        self.__w = w
+        self.__h = h
+        self.BMI = w/h ** 2
+    # 通过函数来改变 w 的值，在改变时调用私有的 update bmi 方法改变 bmi 属性的值
+    def update_w(self, w):
+        self.__w = w
+        self._update_bmi()
+    def _update_bmi(self):
+        self.BMI = self.__w /self.__h ** 2
+def main():
+    x = X(46,1.57)
+    print(x.BMI)
+    x.update_w(46.5)
+    x.update_w(47.5)
+    x.update_w(48)
+    print(x.BMI)
+if __name__ == "__main__":
+    main()
+```
+
+```
+18.662014686194166
+19.473406629072173
+```
+
+分析改进版一的程序：
+
+-  w 变为私有了，更新必须通过对象方法类执行，并将 BMI 的更新放于其中，实现功能逻辑；
+- BMI 属性依旧可以被外部访问和修改，那也就是说外部可以随意改变 BMI 的值，这显然是不合理的；
+- 与 w 相关的代码全部被更改，在项目维护中可能会导致工作量巨大；
+- 无论 BMI 属性是否被访问，每次 w 更新均会更新 BMI，有可能一万天都不看BMI，但每天都要更新 w，就进行了一万次计算，**造成了一定的计算浪费**。
+
+改进版（二）：
+
+```python
+# 场景：监控 BMI 指标，每天更新体重，隔几天看一次BMI指数
+class X:
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+    def get_bmi(self):
+        return self.w / self.h ** 2
+
+def main():
+    x = X(46,1.57)
+    print(x.get_bmi())
+    x.w = 47
+    x.w = 48
+    x.w = 49
+    print(x.get_bmi())
+if __name__ == "__main__":
+    main()
+```
+
+```
+18.662014686194166
+19.879102600511175
+```
+
+分析改进版二的程序：
+
+- 保持 w 和 h 属性可以随意更改，但 bmi 指数仅在被访问时实时计算出结果，但无法在类内部方法中用到 bmi 属性。
+- 访问 BMI 的方式由属性改为方法，造成了一定程度上的代码修改。
+- 在 w 更新频率高于 BMI 访问频率时，节省了计算资源；但当 w 未更新却多次访问 BMI 指数时，却造成了重复计算。
+
+改进版（三）：
+
+```python
+# 场景：监控 BMI 指标，每天更新体重，隔几天看一次BMI指数
+class X:
+    def __init__(self, w, h):
+        self._w = w
+        self._h = h
+        self._bmi = w / h ** 2
+        
+    def get_w(self):
+        return self._w
+    def set_w(self,value):
+        if value <= 0:
+            raise ValueError("Weight below 0 is not possible")
+        self._w = value
+        self._bmi = self._w / self._h ** 2
+    def get_bmi(self):
+        return self._bmi
+    # 通过 property 对象显式的控制属性访问
+    w = property(get_w,set_w)
+    BMI = property(get_bmi)
+
+def main():
+    x = X(46,1.57)
+    print(x.BMI)
+    x.w = 47
+    x.w = 48
+    x.w = 49
+    print(x.BMI)
+if __name__ == "__main__":
+    main()
+```
+
+```
+18.662014686194166
+19.879102600511175
+```
+
+分析改进版三的程序：
+
+- 通过 Property 对象显式的控制属性的访问；
+
+- 仅在 w 被更改时更新 BMI，充分避免了重复计算；
+- 很容易的增加了异常处理，对更新属性进行了预检验；
+- 完美复用原始调用代码，在调用方不知情的情况下完成功能添加。
+
+> 注：Property 对象声明必须在访问控制函数之后，否则无法完成 Property 对象的创建。
+
+改进版三只是为了深入剖析 Property 对象，实际情况下我们采用下面改进版四的写法，更加优雅。
+
+```python
+# 场景：监控 BMI 指标，每天更新体重，隔几天看一次BMI指数
+class X:
+    def __init__(self, w, h):
+        self._w = w
+        self._h = h
+        self._bmi = w / h ** 2
+    
+    @property
+    def w(self):
+        return self._w
+    @w.setter
+    def w(self,value):
+        if value <= 0:
+            raise ValueError("Weight below 0 is not possible")
+        self._w = value
+        self._bmi = self._w / self._h ** 2
+    @property
+    def BMI(self):
+        return self._bmi
+
+def main():
+    x = X(46,1.57)
+    print(x.BMI)
+    x.w = 47
+    x.w = 48
+    x.w = 49
+    print(x.BMI)
+if __name__ == "__main__":
+    main()
+```
+
+从改进版三的程序中我们发现传给 Property 对象的是函数名，那么对优雅的方式是用 Decorator 来实现。
+
+##### 总结：Property用法
+
+- `property(fget=None, fset=None, fdel=None, doc=None)`，四个参数为：访问变量的方法，变量赋值的方法，删除变量的方法，和方法的注释；
+- 使用 `@Property` **默认**实现了**可读**；
+- 被 `@Property` 修饰过的 method 可以通过 `@method.setter` **继续装饰单输入参数方法**实现可写。 
+
+#### Cross-Cutting and Duck Typing
+
+##### 传统 OOP VS 鸭子类型
+
+- 传统 OOP 基于类别进行设计，从类别出发逐步扩展；
+- 鸭子类型仅考虑功能，从需要满足的功能触发进行设计。
+
+##### 传统 OOP 的多态 VS 鸭子类型的多态
+
+- 传统 OOP 中的多态大多基于共同的父类进行设计；
+- Python 中的鸭子类型无需考虑继承关系，实现了某个通用的接口就可以完成多态设计，比如说 special method。
+
+#### Mixln：基于鸭子类型的视角看多继承（Multi-Inheritance）
+
+```python
+class X:
+    def f1():
+        pass
+# Y 类中含有 f1 和 f2
+class Y(X):
+    def f2():
+        pass
+class A:
+    def f3():
+        pass
+def do_f1(x):
+    x.f1()
+def do_f2(x):
+    x.f2()
+def do_f3(x):
+    x.f3()
+# Z 继承自 Y 和 A，那么 Z 中含有 f1, f2 和 f3
+class Z(Y, A):
+    pass
+```
+
+#### Cross-Cutting：基于鸭子类型的视角看 Decorator 与 Special Method
+
+- 通过给一个类实现一个个的 Special Method，可以让该类越来越像 Python 的 Built-in Class
+- 实现 Special Method 是从语言衔接层面为 Class 赋能；
+- 实现 Decorator 是从通用的函数功能层面为 Class 赋能；
+- 通过多继承（Multi-Inheritance），利用 MixIn 的理念，可以为 Class 批量化的赋能。
+
+-----------------------------
+
+说实话，这节课实在是听得云里雾里，很多东西并不怎么清楚具体概念，后续需要自己研读一些书籍，比如《流畅的 Python》。但其实做 AI 并不需要很深刻的 Python 语言知识，而 Python 中关于 OOP 的自己短时间也不打算再去学更深入的东西了。
