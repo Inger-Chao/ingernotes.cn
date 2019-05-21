@@ -1,9 +1,9 @@
 # main text of home
-name: 赵琦 | Inger Chao
-bio: 白手起家的孩子自寻出路
+name: Inger Chao
+bio: A blog about technology and stuff related
 
 # twitter summary info
-description: A blog about technology and stuff related
+# description: A blog about technology and stuff related
 
 markdown: kramdown
 language: zh-CN
