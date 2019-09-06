@@ -60,9 +60,15 @@ F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}\\
 f(x) = F'(x)= \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2} \\
 \text{其中，}\mu 为位置函数，\gamma >0 为形状参数
 $$
+
+
 Logistic / Sigmoid 函数：$h_\theta = g(\theta^Tx) = \frac{1}{1+e^{-\theta^Tx}}$
 
+
+
 <img src="./../assets/images/ml/sigmoid.jpeg" alt="sigmoid-fucntion" style="zoom:50%;" />
+
+
 
 由于**sigmoid函数**的定义域为负无穷到正无穷，值域为 0 到 1，因此最基本的 LR 分类器可以对两类目标进行分类。logistic 回归处理的是 0-1 分类问题，我们可以假定$ P(y = 1 | x ; \theta) = h_\theta x $ 。对 g(z) 求偏导同样使用梯度下降算法寻找最佳参数。
 
