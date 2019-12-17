@@ -1,7 +1,7 @@
 ```
 title: "C++ MFC：优雅的 DEBUG 方式 & 解决注册表读写问题"
 layout: post
-date: 2019-11-27
+date: 2019-12-16
 tag:
 - C++
 - Debug
