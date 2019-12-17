@@ -1,4 +1,4 @@
-```
+---
 title: "C++ MFC：优雅的 DEBUG 方式 & 解决注册表读写问题"
 layout: post
 date: 2019-12-16
@@ -7,9 +7,10 @@ tag:
 - Debug
 category: blog
 author: ingerchao
-```
+---
 
-C++ 中 MFC 应用程序优雅的 debug 方式**：让exe在启动时同时启动一个控制台，在控制台中使用 cout 或 printf 对程序中的值进行 debug。
+
+**C++ 中 MFC 应用程序优雅的 debug 方式**：让exe在启动时同时启动一个控制台，在控制台中使用 cout 或 printf 对程序中的值进行 debug。
 
 ![1576503344334](./../assets\images\program\bolt/1576503344334.png)
 
