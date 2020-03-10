@@ -5,7 +5,8 @@ date: 2016-06-16
 tag:
 - mysql
 - java
-category: project
+category: projects
+projects: true
 author: ingerchao
 ---
 

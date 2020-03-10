@@ -45,7 +45,7 @@ valine_comment:
     # placeholde
     placeholder: “ヾﾉ≧∀≦)o不要只是浏览，和作者互动吧！"
     pageSize: 10
-    categories: [blog, project] # only show valine for posts that have these categories
+    categories: [blog, projects] # only show valine for posts that have these categories
 
 
 # if you don't have any of social below, comment the line
@@ -103,13 +103,15 @@ show-tags: true
 related: true
 
 # Display links for next and previous posts for the specified categories
-post-advance-links: [blog, project]
+post-advance-links: [blog, projects]
 
 # show author block at the end of a post ?
 show-author: true
 
 # do you want some animations?
 animation: true
+
+
 
 plugins:
 - jekyll-seo-tag

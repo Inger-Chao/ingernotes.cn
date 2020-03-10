@@ -4,7 +4,8 @@ layout: post
 date: 2019-04-25
 tag:
 - android
-category: project
+category: projects
+projects: true
 author: ingerchao
 ---
 

@@ -9,6 +9,7 @@ tag:
 - vue 
 - web
 category: projects
+projects: true
 author: ingerchao
 ---
 
