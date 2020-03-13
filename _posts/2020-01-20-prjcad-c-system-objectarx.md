@@ -1,6 +1,5 @@
-```
 ---
-title: "基于MFC和ObjectARX的AutoCAD二次开发：锚杆支护系统的设计及自动绘图软件"
+title: "基于ObjectArx的AutoCAD二次开发：锚杆支护系统的设计及自动绘图软件"
 layout: post
 date: 2020-01-20
 tag:
@@ -10,7 +9,14 @@ category: projects
 projects: true
 author: ingerchao
 ---
-```
+
+### 开发工具及版本说明
+
+- OS：Windows 10
+- Visual Studio 2015
+- ObjectArx 2017 
+- AutoCAD 2017
+- C++ 11
 
 ### 需求说明
 
