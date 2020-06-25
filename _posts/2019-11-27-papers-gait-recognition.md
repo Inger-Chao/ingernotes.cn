@@ -1,7 +1,7 @@
 ---
 title: "论文阅读笔记：关于步态识别的几篇论文"
 layout: post
-date: 2019-11-27
+date: 2020-06-25
 tag:
 - Paper
 - Computer Vision
@@ -9,7 +9,7 @@ category: blog
 author: ingerchao
 ---
 
-### A Comprehensive Study on Cross-View Gait Based Human Identification with Deep CNNs [2017]
+### [A Comprehensive Study on Cross-View Gait Based Human Identification with Deep CNNs [2017]](./2019-06-27-multimodal-feature-fusion-for-cnn-gait-recognition.md)
 
 
 
@@ -103,4 +103,6 @@ HumanID步态挑战问题提供了一组12个难度不断增加的实验。 12�
 - 在CASIA-B数据集的NM下识别准确性交叉视图。针对所有视角训练一个GaitNet模块，平均准确率 81.8%，达到了目前最高的性能结果。
 
 <img src="./../assets/images/paper/1127-fvg-dataset.png" alt="fvg-dataset" style="zoom:50%;" />
+
+### 
 
