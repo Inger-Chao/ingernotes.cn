@@ -58,7 +58,7 @@ valine_comment:
 # youtube: myyoutube
 # spotify: myspotify
 github: inger-chao
-wechat: Yue-6666666
+wechat: Inger030
 # qq: 396558528
 # gitlab: mygitlab
 # lastfm: mylastfm
@@ -83,8 +83,8 @@ authors:
 width: normal
 
 # if you don't need pagination, comment the *paginate* configs below
-# paginate: 5
-# paginate_path: "blog/:num/"
+ paginate: 10
+ paginate_path: "blog/:num/"
 
 # if you don't need projects, comment the *projects* configs below
 projects: true
