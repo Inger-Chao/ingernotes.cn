@@ -10,7 +10,7 @@ homepage:
   text: ingernotes.cn
 ---
 
-# 赵 琦
+# **赵 琦**
 
 <!--
 include contact information from the front matter
