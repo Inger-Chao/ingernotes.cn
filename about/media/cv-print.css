@@ -110,7 +110,7 @@ body {
 }
 ol,
 ul {
-  list-style: none;
+  list-style: disc;
 }
 blockquote,
 q {
@@ -204,7 +204,6 @@ code {
 }
 
 li:before {
-
   position: relative;
   left: -0.5em;
 }
