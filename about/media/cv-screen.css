@@ -216,7 +216,7 @@ ul {
 li {
   /*second line indent*/
     margin-left: 3.25em;
-  text-indent: -1.25em;
+  /*text-indent: -1.25em;*/
   /*color: #777;*/
 }
 
