@@ -1,4 +1,17 @@
-## torch.cuda.is_available()结果为false
+---
+title: torch.cuda.is_available()结果为false
+layout: post
+date: 2020-09-07
+tag: 
+- Deep Learning
+- Linux
+category: blog
+author: ingerchao
+---
+
+
+
+
 
 - 已安装 python3.6.4 并更改 `python -> python3`, `python2 -> python2`
 - 使用 pip3 安装

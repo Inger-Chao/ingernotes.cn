@@ -4,9 +4,9 @@ layout: post
 date: 2020-09-03
 tag: 
 - Paper
-Category: blog
-Author: ingerchao
-Description: 利用 GAN 完成特定角度下的步态识别任务
+category: blog
+author: ingerchao
+description: 利用 GAN 完成特定角度下的步态识别任务
 ---
 
 ### Abstract
