@@ -82,7 +82,40 @@ description: 审稿意见中给的借鉴论文
 
 
 
+### 实验复现
 
+#### 环境
+
+- 西安科技大学可视化实验室深度学习服务器 
+
+- `Python: 3.6.4`
+
+- `CUDA Version 10.0.130`
+
+- ```c
+  #define CUDNN_MAJOR 7
+  #define CUDNN_MINOR 4
+  #define CUDNN_PATCHLEVEL 2
+  --
+  #define CUDNN_VERSION (CUDNN_MAJOR * 1000 + CUDNN_MINOR * 100 + CUDNN_PATCHLEVEL)
+  ```
+
+- `VGA compatible controller: NVIDIA Corporation GM200 [GeForce GTX TITAN X] (rev a1)`
+
+- `pytorch` 安装
+
+### 踩坑
+
+1. pytorch 安装检查是否可用返回 False【ref 4】：
+2. 
 
 ----
+
+**参考资料**
+
+1. [Linux查看GPU信息和使用情况](https://blog.csdn.net/weiyumeizi/article/details/83035711)
+2. [查看 linux系统中的 CUDA，CUDNN 版本号](https://blog.csdn.net/u011394059/article/details/78455252)
+3. [centos下安装python3详细教程](https://blog.csdn.net/t8116189520/article/details/81976755)
+
+4. [Linux环境下pytorch安装教程](https://blog.csdn.net/weixin_45250844/article/details/101854871)
 

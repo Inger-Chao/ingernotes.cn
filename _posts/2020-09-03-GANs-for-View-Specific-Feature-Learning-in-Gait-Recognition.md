@@ -20,7 +20,7 @@ Description: 利用 GAN 完成特定角度下的步态识别任务
 
 实验数据集：OU-ISIR, CASIA-B, USF
 
-### Introduction
+### 1. Introduction
 
 <img src="./../assets/images/paper/903-gan-gait-recognition.png" alt="gan-gait-recognition" style="zoom:40%;" />
 
@@ -28,4 +28,43 @@ Description: 利用 GAN 完成特定角度下的步态识别任务
 2. 视角分类器：交叉熵损失训练视角分类器，判断输入序列属于哪个视角；
 3. View-Transform Layer: 从一个视图转换到另一个视图；
 4. 对改进的GANs结构进行像素级损失和多任务对抗性损失训练。
+
+### 2. Related Work
+
+### 3. Method
+
+#### 3.1 Method Overview
+
+给出 $x^p$ 表示 p 角度下的 probe 图像，$\{x_1^g, x_2^g, x_3^g, ..., x_n^g\}$ 表示 g 角度下的 n 个 gallery 图像，目标是识别出  $x^p$ 的身份信息。
+
+- $z^p = E(x^p)$
+- $\{ z^g_i, ... \}$
+
+- 视角分类器：得到 p 和 g
+-  通过生成对抗网络生成 $x^p$ 对应的 $z^g$
+- 再比较$\{ x^g \}$和 galerry 中每个图像的距离：
+
+<img src="./../assets/images/paper/method-gan-gait.png" alt="mathod-gait-gan" style="zoom:50%;" />
+
+#### 3.2 Period Energy Image
+
+#### 3.3 *Multi-task Generative Adversarial Network*
+
+#### 3.4 Objective Function
+
+### 4. Experiments
+
+#### 4.1 Setup
+
+#### 4.2 Effect of PEI
+
+#### 4.3 *Effect of MGANs*
+
+#### 4.4 *Evaluation of comparison*
+
+#### 4.5 Gait Generation
+
+#### 4.6 *Feature visualization*
+
+### 5. Conclusion and Discussion
 
