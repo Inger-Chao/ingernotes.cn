@@ -23,8 +23,12 @@ author: ingerchao
 ```bash
 [root@222 inger]# cat /usr/local/cuda/version.txt
 CUDA Version 10.0.130
-[root@222 inger]# nvcc -V
--bash: nvcc: 未找到命令
+[root@222 ~]# cd /usr/local/cuda/bin
+[root@222 bin]# ./nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2018 NVIDIA Corporation
+Built on Sat_Aug_25_21:08:01_CDT_2018
+Cuda compilation tools, release 10.0, V10.0.130
 ```
 
 - https://blog.csdn.net/ljp1919/article/details/102640512
