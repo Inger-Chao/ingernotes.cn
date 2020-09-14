@@ -43,10 +43,12 @@ author: ingerchao
 - 根据相似三角形关系原理可以得出：
 
 $$
+{
 \begin{cases}
 u_{ccd} = f_x(\frac{X}{Z} + c_x) \\
 v_{ccd} = f_y(\frac{Y}{Z} + c_y)
 \end{cases}
+}
 $$
 
 > 成像原理理论知识先不看了，看看 OpenCV 相机标定应该怎么用。
