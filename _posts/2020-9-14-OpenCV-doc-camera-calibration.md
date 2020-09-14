@@ -76,7 +76,7 @@ double calibrateCamera(InputArrayOfArrays objectPoints, InputArrayOfArrays image
 
 #### 原理
 
-<img src="https://img2020.cnblogs.com/blog/1251718/202005/1251718-20200503161951749-1222809582.png" alt="img" style="zoom:75%;" />
+<img src="./../assets/images/opencv/object2image.png" alt="测距原理图" style="zoom:75%;" />
 
 根据相似三角形计算单目相机到物体的距离，必须已知一个确定的长度。
 
@@ -87,7 +87,7 @@ double calibrateCamera(InputArrayOfArrays objectPoints, InputArrayOfArrays image
 
 #### 实现Demo
 
-
+必须输入一张已知相机距离的图像，然后使用相机标定算法得到位置图像距离摄像头的距离。
 
 ---
 
