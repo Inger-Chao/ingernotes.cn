@@ -25,7 +25,7 @@ author: ingerchao
 CUDA Version 10.0.130
 [root@222 ~]# cd /usr/local/cuda/bin
 [root@222 bin]# ./nvcc -V
-nvcc: NVIDIA (R) Cuda compiler driver
+nvcc: NVIDIA (R) Cuda compiler vdriver
 Copyright (c) 2005-2018 NVIDIA Corporation
 Built on Sat_Aug_25_21:08:01_CDT_2018
 Cuda compilation tools, release 10.0, V10.0.130
@@ -72,6 +72,4 @@ of the CUDA driver.
 [root@222 ~]# nvidia-smi
 Unable to determine the device handle for GPU 0000:00:05.0: Unknown Error
 ```
-
-
 
