@@ -1,6 +1,6 @@
 # main text of home
-name: Inger Chao
-bio: A blog about technology and stuff related
+name: Inger Notes
+bio: 一个记录技术和生活的私人博客
 
 # twitter summary info
 # description: A blog about technology and stuff related
@@ -72,8 +72,8 @@ email: ingerchao@outlook.com
 
 authors:
     ingerchao:
-        name: Inger Chao
-        bio: A girl willing to learn and progress
+        name: Inger Chao（赵琦）
+        bio: CS 研二在读
         external-image: false
         picture: assets/images/profile.jpg
 
