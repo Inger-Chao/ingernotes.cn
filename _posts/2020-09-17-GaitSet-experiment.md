@@ -37,5 +37,18 @@ pip3 install opencv-python
 
 
 
+OpenCV for Python 有很长一段时间需要 Build，要等比较长一段时间。
+
+Build 过程中出现问题，无法找到 Python.h，需要安装python-dev。
+
+```bash
+# 找一下 yum 里面叫什么， 不同的系统名称不一样
+yum search python3 | grep devel
+
+yum install python3-devel
+```
+
+
+
 
 

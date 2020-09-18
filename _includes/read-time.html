@@ -2,8 +2,8 @@
     {% assign words = content | number_of_words %}
 
     {% if words < 360 %}
-        1 min
+        1 分钟前
     {% else %}
-        {{ words | divided_by:180 }} mins
+        {{ words | divided_by:180 }} 分钟前
     {% endif %}
 </span>
