@@ -15,7 +15,7 @@ author: ingerchao
 
 - 数据集：申请 [CASIA-B](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp) 数据集和 [OU-MVLP](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitMVLP.html) 两个数据库的解压密码
 - 克隆[源代码 git 仓库](https://github.com/AbnerHqC/GaitSet)到本地
-- [pytorch 环境配置](./2020-09-17-linux-nvidia-cuda)
+- [pytorch 环境配置](./../2020-09-17-linux-nvidia-cuda)
 
 ### 安装程序所需的依赖
 
