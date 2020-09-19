@@ -145,3 +145,36 @@ Loading training data...
 
 <img src="./../assets/images/python/train-gaitset-casia-b.png" alt="image-20200918172052670" style="zoom:50%;" />
 
+从 9 月 17日 下午四点开始训练，大概 12 个小时训练完成。
+
+```bash
+[root@localhost GaitSet]# ls -l work/
+总用量 0
+drwxr-xr-x. 3 root root 21 9月  17 04:18 checkpoint
+drwxr-xr-x. 2 root root 47 9月  17 04:18 OUMVLP_network
+drwxr-xr-x. 2 root root 34 9月  18 04:36 partition
+```
+
+```bash
+[root@localhost GaitSet]# python3 test.py
+Initialzing...
+Initializing data source...
+Data initialization complete.
+Initializing model...
+Model initialization complete.
+Loading the model of iteration 80000...
+Transforming...
+Evaluating...
+Evaluation complete. Cost: 0:00:49.330972
+===Rank-1 (Include identical-view cases)===
+NM: 95.587,	BG: 89.026,	CL: 73.198
+===Rank-1 (Exclude identical-view cases)===
+NM: 95.145,	BG: 88.029,	CL: 71.645
+===Rank-1 of each angle (Exclude identical-view cases)===
+NM: [91.80 98.30 98.40 97.50 93.30 92.10 94.10 97.40 98.00 97.80 87.90]
+BG: [86.30 91.30 93.30 89.90 85.50 80.50 84.50 90.40 92.30 92.12 82.20]
+CL: [69.20 78.90 79.10 76.80 69.20 67.70 70.20 73.40 74.50 70.70 58.40]
+```
+
+测试在 CASIA-B 的下的性能。
+
