@@ -156,3 +156,61 @@ NM: 16.833
 NM: [18.00 20.00 12.50]
 ```
 
+```bash
+Loading the model of iteration 2...
+Transforming...
+Evaluating...
+Evaluation complete. Cost: 0:00:21.357544
+===Rank-1 (Include identical-view cases)===
+NM: 64.444
+===Rank-1 (Exclude identical-view cases)===
+NM: 10.000
+===Rank-1 of each angle (Exclude identical-view cases)===
+NM: [10.00 12.50  7.50]
+```
+
+
+
+```bash
+Loading the model of iteration 10...
+Transforming...
+Evaluating...
+Evaluation complete. Cost: 0:00:21.843741
+===Rank-1 (Include identical-view cases)===
+NM: 67.222
+===Rank-1 (Exclude identical-view cases)===
+NM: 10.833
+===Rank-1 of each angle (Exclude identical-view cases)===
+NM: [10.00 15.00  7.50]
+```
+
+
+
+```bash
+Loading the model of iteration 500...
+Transforming...
+Evaluating...
+Evaluation complete. Cost: 0:00:00.629230
+===Rank-1 (Include identical-view cases)===
+NM: 87.222
+===Rank-1 (Exclude identical-view cases)===
+NM: 16.833
+===Rank-1 of each angle (Exclude identical-view cases)===
+NM: [18.00 20.00 12.50]
+```
+
+
+
+```bash
+Loading the model of iteration 2700...
+Transforming...
+Evaluating...
+Evaluation complete. Cost: 0:00:00.892912
+===Rank-1 (Include identical-view cases)===
+NM: 90.000
+===Rank-1 (Exclude identical-view cases)===
+NM: 17.667
+===Rank-1 of each angle (Exclude identical-view cases)===
+NM: [18.00 20.00 15.00]
+```
+
