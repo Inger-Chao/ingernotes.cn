@@ -4,7 +4,7 @@ date: 2020-10-28
 author: ingerchao
 category: blog
 tag:
-- paper
+- Paper
 - deep learning
 ---
 
