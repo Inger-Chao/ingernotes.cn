@@ -5,7 +5,7 @@ author: ingerchao
 category: blog
 tag:
 - Paper
-- deep learning
+- Deep Learning
 ---
 
 
