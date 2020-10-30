@@ -1,6 +1,6 @@
 ---
 title: "以 A4 纸为参考实时测量物体大小 & 双目摄像头测距"
-date: 2020-10-30
+date: 2020-10-29
 author: ingerchao
 category: blog
 tag:
