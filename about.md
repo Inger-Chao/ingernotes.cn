@@ -46,7 +46,7 @@ Supported arguments:
 
 ## 项目经历
 
-### **斜井井壁结构设计软件** `2020.6 - 2020.8`
+### **[斜井井壁结构设计软件](https://github.com/Inger-Chao/shaftCAD)** `2020.6 - 2020.8`
 
 `C++, AutoCAD`
 
@@ -63,7 +63,7 @@ Supported arguments:
 - 对主题源 php 文件进行了部分修改；
 - 在 Ubuntu 服务器中对网站进行部署；
 
-### **[锚杆支护设计及自动绘图系统]()** `2019.10-2020.2`
+### **[锚杆支护设计及自动绘图系统](https://www.ingernotes.cn/prjcad-c-system-objectarx/)** `2019.10-2020.2`
 
 `C++, AutoCAD`
 
@@ -97,7 +97,13 @@ Supported arguments:
 - 一款以人与知识为入口，采用知识付费理念开发的助学类 Android App；
 - 采用 Mockplus 对项目进行原型设计，项目的配色和界面得到了评委一致好评；
 
+---
 
+## 科研文献
+
+* ### CJAM: Convolutional Neural Network Joint Attention Mechanism in Gait Recognition
+
+* ### Sewer Pipe Defects Assessment based on Automated Pipe Calibration in Single Image
 
 ## 获奖经历
 
