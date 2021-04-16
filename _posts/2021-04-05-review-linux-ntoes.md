@@ -390,18 +390,22 @@ scp -r 目标用户名@目标主机ip:/目标文件的绝对路径 保存到本�
 
 **参数：**
 
-- -o: 产生目标文件
+- -E: 预处理；
+- -S: 编译；
+- -c：汇编；
+- 链接没参数；
+
+- -o: 产生目标文件，指定生成的文件名字；
 
 - -I: 指定头文件路径（相对路径/绝对路径）；
 - -i: 指定头文件名字（一般不用，直接放在 #include<xxx.h>）；
-- -L: 指定连接的动态库或静态库；
-- -l（小写L）：指定需要连接的库的名字，在使用时需要库名去头去尾，去掉前置 lib 和后缀 .a；
+- -L: 指定连接的动态库或静态库路径 -L libpath；
+- -l（小写L）：指定需要连接的库的名字，在使用时需要库名去头去尾，去掉前置 lib 和后缀 .a , -l libname；
 - -D: 后面直接跟宏命名，定义一个编译时期宏，默认宏的内容为1；
   - -D key = value，定义命为 key 的宏，内容为 value；
 - -O: Optimize, 优化代码，等级从 0 - 3，O3为最高等级；
 - -Wall: 在程序编译时输出警告信息；
 - -g：程序中添加一些调试信息，gdb调试时必须添加；
-- -c：只编译子程序但不链接。
 
 #### 静态库
 
@@ -498,9 +502,11 @@ add.c  add.o  libCalc.so  mul.c  mul.o
 
 动态库通过动态链接器被调用，动态连接器的本质就是一个动态库。动态链接器的调用规则是根据环境变量调用的，`/lib`中存放所有文件执行时用到的动态库，所以该问题的解决方式 1 是将 .so 文件放到 /lib 目录中，但这种方式在实际情况中不能这样做，因为有可能用户创建的动态库与系统动态库产生重名问题，从而造成严重错误。
 
-第二种解决方式是配置 `LD_LIBRARY_PATH` 环境变量（不常用），将动态库路径指定给该环境变量后，在调用时会先于系统动态库查找相应路径。临时测试时使用 LIB_LIBRARY_PATH = 动态库路径，然后 exprot LD_LIBRARY_PATH .
+第二种解决方式是配置 `LD_LIBRARY_PATH` 环境变量（不常用），将动态库路径指定给该环境变量后，在调用时会先于系统动态库查找相应路径。
 
-第三种解决方式：找到动态链接器的配置文件，将动态库的路径写到配置文件`/etc/ld.so.conf`中并更新`sudo ldconfig -v`。
+第三种临时测试时使用 LIB_LIBRARY_PATH = 动态库路径，然后 exprot LD_LIBRARY_PATH ，或者 `export LD_LIBRARY_PATH=./lib`, 终端关闭时失效。
+
+第四种解决方式（推荐）：找到动态链接器的配置文件，将动态库的路径写到配置文件`/etc/ld.so.conf`中并更新`sudo ldconfig -v`。
 
 动态库的**优点**：
 
@@ -511,6 +517,139 @@ add.c  add.o  libCalc.so  mul.c  mul.o
 
 1. 发布程序的时候，需要将动态库提供给用户；
 2. 动态库没有打包到应用程序中，所以在加载速度会稍微慢一点。
+
+### GDB
+
+```bash
+[inger@VM-0-4-centos mysort]$ gdb app # 1. 启动 gdb
+GNU gdb (GDB) Red Hat Enterprise Linux 7.6.1-120.el7
+Copyright (C) 2013 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-redhat-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /home/inger/linux/day3/mysort/app...done.
+(gdb) l # l 查看程序源码, 每次只会列出来 10 行，按回车默认执行上一次命令可以继续看
+1	#include <stdio.h>
+2	#include "sort.h"
+3
+4	int main(){
+5	  int i;
+6	  int arr1[] = {9, 10 , 3, 4, 6, 29, 8, 17, 55, 80, 98, 50, 20, 115, 79, 34};
+7	  int arr2[] = {9, 10 , 3, 4, 6, 29, 8, 17, 55, 80, 98, 50, 20, 115, 79, 34};
+8
+9	  int len = sizeof(arr1) / sizeof(arr1[0]);
+10
+(gdb) l main.c:main
+1	#include <stdio.h>
+2	#include "sort.h"
+3
+4	int main(){
+5	  int i;
+6	  int arr1[] = {9, 10 , 3, 4, 6, 29, 8, 17, 55, 80, 98, 50, 20, 115, 79, 34};
+7	  int arr2[] = {9, 10 , 3, 4, 6, 29, 8, 17, 55, 80, 98, 50, 20, 115, 79, 34};
+8
+9	  int len = sizeof(arr1) / sizeof(arr1[0]);
+10
+(gdb)
+11	  printf("Sort Array: \n");
+12	  for(i = 0; i < len; ++i){
+13	    printf("%d\t", arr1[i]);
+14	  }
+15	  printf("\n");
+16
+17	  selectionSort(arr1, len);
+18	  printf("Selection Sort: \n");
+19	  for(i = 0; i < len; ++i){
+20	    printf("%d  ", arr1[i]);
+(gdb) break 17 # 在17行打断点
+Breakpoint 1 at 0x4007c1: file main.c, line 17.
+(gdb) break 13 if i == 10 # 循环当 i == 10 的时候打一个断点
+Breakpoint 2 at 0x400791: file main.c, line 13.
+(gdb) i b # 查看断点信息
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004007c1 in main at main.c:17
+2       breakpoint     keep y   0x0000000000400791 in main at main.c:13
+	stop only if i == 10
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004007c1 in main at main.c:17
+2       breakpoint     keep y   0x0000000000400791 in main at main.c:13
+	stop only if i == 10
+```
+
+- 启动 gdb ： gdb appname
+  - start -- 只执行一步
+    - n: next, 直接跳过函数；
+    - s: step, 进入函数内部；finish: 从当前进入的函数中退出；
+    - c: continue, 直接停在断点位置；
+  - run -- 直接运行完，需要在 run 之前打好断点；
+- l: 查看源码，每次显示十行，回车继续显示；
+  - list 10
+  - l filename: 行号（也可以是函数名）
+- 设置断点：break
+  - 设置当前文件断点：b line number；
+  - 设置指定文件断点：b filename : line number;
+  - 设置条件断点：b line number  if value == 10;
+  - 删除断点：delete break number;
+  - 查看断点信息: info break;
+- p(rint) var name ： 查看变量值；
+- ptype var name: 查看变量类型；
+- set var 变量名 = 值：设置变量值；
+- display varname: 追踪变量的值，每次循环的时候都显示该变量的值；
+  - undisplay varname: 取消追踪该变量的值；
+  - 获取变量编号：info display
+
+### Makefile
+
+当项目很大的时候，gcc 编译指令会非常复杂，所以我们使用代码管理工具 makefile，将所有的代码编译命令都写到 makefile 中，就不需要我们手动再去敲很复杂的 gcc 了。
+
+Makefile 文件中记录了编译程序的一些步骤。公司中的 makefile 都是架构师或者大牛写的，我们只需要编写指定模块就好了。
+
+如果是我们自己的项目，写一个比较菜的 makefile 指令就够用了。
+
+makefile 有两种命名规则 首字母大写或全部小写的 *makefile*. 
+
+```bash
+[inger@VM-0-4-centos makefile]$ ls
+add.c  head.h  main.c  mul.c
+[inger@VM-0-4-centos makefile]$ touch makefile
+[inger@VM-0-4-centos makefile]$ vim makefile
+[inger@VM-0-4-centos makefile]$ cat makefile # 查看 makefile 中的内容
+app:main.c add.c mul.c # 目标【最终要生成的文件名字】: 依赖【生成目标所需要的原材料】
+		gcc main.c add.c mul.c -o app # tab【必须有！】 命令
+[inger@VM-0-4-centos makefile]$ make # 使用 make 指令生成 app
+gcc main.c add.c mul.c -o app
+[inger@VM-0-4-centos makefile]$ ls
+add.c  app  head.h  main.c  makefile  mul.c
+```
+
+**makefile 规则**：目标，依赖，命令。
+
+```makefile
+app:main.c add.c mul.c 
+		gcc main.c add.c mul.c -o app 
+```
+
+第一个版本的 makefile 存在缺陷，文件很多的情况下，编译效率是非常低的。我们想要达到的效果是，修改一次就编译一次，不修改就不编译的。那么就需要生成 .o。第二个版本的makefile如下：
+
+```makefile
+app:main.o add.o mul.o
+  gcc main.o add.o mul.o -o app
+main.o:main.c
+  gcc -c main.c
+add.o:add.c
+  gcc -c add.c
+mul.o:mul.c
+  gcc -c mul.c
+```
+
+**第一条规则用来生成最终目标**app，后面三条规则用于生成子目标，这些子目标是用来生成最终目标的依赖。当调用第一个规则时会发现不存在依赖，所以会往下查找有没有生成依赖的规则，找到了就会先执行下面的规则。在v2版本的 makefile 中，第一条规则是最后被执行的。使用 v2 版本的 makefile，当文件修改时，无需调用其他文件的编译命令。第一条规则中的命令，不管什么时候都会被最后执行。
+
+makefile 向下检索，构建出一棵关系依赖树，从下向上执行命令，生成最终目标文件。目标是通过依赖生成的，makefile **通过比较目标和依赖的时间**，当依赖的时间大于之前的目标时间时，就会调用编译命令来进行更新；如果依赖的时间比之前的目标时间短，就不需要调用编译命令了。
 
 ---
 
