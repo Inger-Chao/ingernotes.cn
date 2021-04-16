@@ -651,6 +651,46 @@ mul.o:mul.c
 
 makefile 向下检索，构建出一棵关系依赖树，从下向上执行命令，生成最终目标文件。目标是通过依赖生成的，makefile **通过比较目标和依赖的时间**，当依赖的时间大于之前的目标时间时，就会调用编译命令来进行更新；如果依赖的时间比之前的目标时间短，就不需要调用编译命令了。
 
+makefile 可以用自定义变量、模式规则中的公式等进行替换：
+
+```makefile
+obj=main.o add.o mul.o
+target=app
+$(target):$(obj)
+  gcc $(obj) -o $(target)
+%.o:%.c
+  gcc -c $< -o $@
+```
+
+- `$<` : 规则中的第一个依赖；
+- `$@`: 规则中的目标；
+- `$^`: 规则中的所有依赖；
+
+> :warning: 注： 以上三个符号的规则只能在命令中使用。
+
+makefile 中也有一些自己维护的变量，系统维护的变量有些是有默认值，有些没有，可以由用户设置。
+
+- CC=cc
+- CPPFLAGS = -I, 预处理器需要的选项；
+- CFLAGS：编译时使用的参数，-Wall -g -c；
+- LDFLAGS：链接库使用的选项，-L -l；
+
+用户可以修改变量的默认值，比如 `CC=gcc` 。
+
+```makefile
+obj=main.o add.o mul.o
+target=app
+# makefile 中自己维护的变量
+CC=gcc
+CPPFLAGS = -I
+$(target):$(obj)
+	 $(CC) $(obj) -o $(target)
+%.o:%.c
+	$(CC) -c $< -o $@
+```
+
+这样makefile看起来就更高大上了。
+
 ---
 
 视频：[哔哩哔哩黑马](https://b23.tv/Jomal8)
