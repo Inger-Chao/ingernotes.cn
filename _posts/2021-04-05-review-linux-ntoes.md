@@ -1,6 +1,6 @@
 ---
 title: "Linux 基础知识"
-date: 2021-04-05
+date: 2021-04-16
 category: blog
 tag: 
 - Linux
@@ -325,9 +325,34 @@ nslookup 获取域名所对应的 ip, 为什么服务器可以知道域名的服
 
 ### 服务器搭建
 
-#### ftp -- vsftpd
+**ftp -- vsftpd：文件的上传和下载**
 
+服务器端允许用户登陆，并给予一些访问权限，所以服务器端需要 **修改配置文件**，然后 **重启服务**。
 
+1. 安装 `sudo yum install vsftpd`
+2. 修改 `/etc/vsftpd/vsftpd.conf` 配置文件
+3. 重启服务 `sudo service vsftpd restart`
+
+客户端：
+
+- 实名用户登陆
+  1. ftp + 服务器 ip
+  2. 输入用户名和密码
+  3. 文件上传：`put file`
+  4. 文件下载：`get file `
+  5. 退出：`bye`
+- 匿名用户登陆：匿名用户不允许在目录间切换，只能在指定目录范围内工作，因此必须在服务器中创建一个匿名用户的根目录。
+  1. ftp + server ip
+  2. 用户名：anonymous, 密码：直接回车跳过；
+- lftp: 一个 ftp 客户端工具，可以上传和下载目录。
+
+**ssh username@ip**
+
+scp: super copy, 使用该命令的前提就是主机成功安装 openssh-server，可以实现不同主机之间的文件复制。
+
+```bash
+scp -r 目标用户名@目标主机ip:/目标文件的绝对路径 保存到本机的绝对（相对）路径
+```
 
 ###用户管理
 
@@ -349,7 +374,143 @@ nslookup 获取域名所对应的 ip, 为什么服务器可以知道域名的服
 [inger@VM-0-4-centos ~]$ vi /etc/passwd # 查看当前系统的所有用户
 ```
 
+### VIM
 
+垂直分屏：`/:vsp filename `
+
+切换操作：`ctrl + ww`
+
+退出所有: `:qall`
+
+系统级配置文件目录：`/etc/vim/vimrc`
+
+用户及配置文件目录：`~/.vim/vimrc`
+
+### GCC
+
+**参数：**
+
+- -o: 产生目标文件
+
+- -I: 指定头文件路径（相对路径/绝对路径）；
+- -i: 指定头文件名字（一般不用，直接放在 #include<xxx.h>）；
+- -L: 指定连接的动态库或静态库；
+- -l（小写L）：指定需要连接的库的名字，在使用时需要库名去头去尾，去掉前置 lib 和后缀 .a；
+- -D: 后面直接跟宏命名，定义一个编译时期宏，默认宏的内容为1；
+  - -D key = value，定义命为 key 的宏，内容为 value；
+- -O: Optimize, 优化代码，等级从 0 - 3，O3为最高等级；
+- -Wall: 在程序编译时输出警告信息；
+- -g：程序中添加一些调试信息，gdb调试时必须添加；
+- -c：只编译子程序但不链接。
+
+#### 静态库
+
+**命名规则：** `lib + name + .a`；
+
+制作步骤：1. 生成对应的.o 文件（与位置相关的），2. 使用 ar 静态库打包工具将生成的.o文件打包  `ar rcs + 静态库（libname.a） + 生成的所有 .o`；
+
+```bash
+[inger@VM-0-4-centos src]$ tree ../../
+../../
+└── include
+    ├── head.h
+    └── src
+        ├── add.c
+        └── mul.c
+
+2 directories, 3 files
+[inger@VM-0-4-centos src]$ gcc *.c -c -I ../../include/
+[inger@VM-0-4-centos src]$ ls
+add.c  add.o  mul.c  mul.o
+[inger@VM-0-4-centos src]$ ar rcs libCalc.a *.o # 将后缀为 .o 的目标文件打包成静态库
+[inger@VM-0-4-centos src]$ ls
+add.c  add.o  libCalc.a  mul.c  mul.o
+[inger@VM-0-4-centos day3]$ gcc main.c lib/libCalc.a -o main -Iinclude # 调用静态库
+[inger@VM-0-4-centos day3]$ ./main
+48
+# 调用静态库的第二种方式
+gcc main.c -Iinclude -L lib -l Calc -o myapp #-L 库目录 -l：库名
+
+[inger@VM-0-4-centos lib]$ nm libCalc.a # 查看静态库中的内容
+
+add.o:
+0000000000000000 T add  # T 表示代码区
+
+mul.o:
+0000000000000000 T mul
+```
+
+若main函数中引用静态库中的某个函数，则会在编译时将用到的 .o 文件一起打包到可执行文件中。也就是说，**静态库打包的最小单位是 .o 文件**。
+
+静态库的**优点**：
+
+1. 发布程序的时候，不需要提供对应的库；
+2. 由于库已经被打包到了可执行文件中，所以**库的加载速度会很快**；
+
+静态库的**缺点**：
+
+1. 库很多的情况下，导致库的体积很大，从而可执行文件也会变大；
+2. 库发生改变时，需要重新编译程序；当程序很大的时候，有可能编译一次，一天就过去了。
+
+#### 动态库（共享库）
+
+Linux 动态库对应 windows 中的 DLL 文件。
+
+**命名规则：** `lib + name + .so`
+
+制作步骤：1. 生成与位置无关的代码 （.o文件）；2. 使用 gcc 将 .o 打包成动态库。
+
+```bash
+[inger@VM-0-4-centos src]$ ls
+add.c  mul.c
+[inger@VM-0-4-centos src]$ gcc -fPIC -c *.c -I../include # 生成与位置无关的代码
+[inger@VM-0-4-centos src]$ ls
+add.c  add.o  mul.c  mul.o
+[inger@VM-0-4-centos src]$ gcc -shared -o libCalc.so *.o -Iinclude # 打包动态库
+[inger@VM-0-4-centos src]$ ls
+add.c  add.o  libCalc.so  mul.c  mul.o
+[inger@VM-0-4-centos day3]$ gcc main.c lib/libCalc.so -o maind -Iinclude # 使用动态库
+[inger@VM-0-4-centos day3]$ ./maind
+48
+[inger@VM-0-4-centos day3]$ gcc main.c -Iinclude -L./lib -lCalc -o maind2 # 第二种使用动态库的方式，链接错误
+[inger@VM-0-4-centos day3]$ ./maind2
+./maind2: error while loading shared libraries: libCalc.so: cannot open shared object file: No such file or directory
+#ldd 查看可执行程序运行时用到的所有动态库
+[inger@VM-0-4-centos day3]$ ldd maind2
+	linux-vdso.so.1 =>  (0x00007ffd38dd4000)
+	libCalc.so => not found
+	libc.so.6 => /lib64/libc.so.6 (0x00007fa843620000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fa8439ee000) # 通过这个ld链接器链接的
+[inger@VM-0-4-centos day3]$ echo $LD_LIBRARY_PATH
+:/home/inger/.VimForCpp/vim/bundle/YCM.so/el7.x86_64
+[inger@VM-0-4-centos day3]$ vim ~/.bashrc # 修改 LD_LIBRARY_PATH 环境变量
+[inger@VM-0-4-centos day3]$ source ~/.bashrc
+[inger@VM-0-4-centos day3]$ ldd maind2
+	linux-vdso.so.1 =>  (0x00007fff5b1fb000)
+	libCalc.so => /home/inger/linux/day3/lib/libCalc.so (0x00007f2e8d9e6000) # 此时就找到了动态库目录
+	libc.so.6 => /lib64/libc.so.6 (0x00007f2e8d618000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f2e8dbe8000)
+[inger@VM-0-4-centos day3]$ echo $LD_LIBRARY_PATH
+:/home/inger/.VimForCpp/vim/bundle/YCM.so/el7.x86_64:/home/inger/.VimForCpp/vim/bundle/YCM.so/el7.x86_64:/home/inger/linux/day3/lib
+```
+
+**动态库链接错误解决方案**
+
+动态库通过动态链接器被调用，动态连接器的本质就是一个动态库。动态链接器的调用规则是根据环境变量调用的，`/lib`中存放所有文件执行时用到的动态库，所以该问题的解决方式 1 是将 .so 文件放到 /lib 目录中，但这种方式在实际情况中不能这样做，因为有可能用户创建的动态库与系统动态库产生重名问题，从而造成严重错误。
+
+第二种解决方式是配置 `LD_LIBRARY_PATH` 环境变量（不常用），将动态库路径指定给该环境变量后，在调用时会先于系统动态库查找相应路径。临时测试时使用 LIB_LIBRARY_PATH = 动态库路径，然后 exprot LD_LIBRARY_PATH .
+
+第三种解决方式：找到动态链接器的配置文件，将动态库的路径写到配置文件`/etc/ld.so.conf`中并更新`sudo ldconfig -v`。
+
+动态库的**优点**：
+
+1. 执行程序体积小；
+2. 动态库函数接口不变的情况下更新不需要重新编译程序；
+
+动态库的**缺点**：
+
+1. 发布程序的时候，需要将动态库提供给用户；
+2. 动态库没有打包到应用程序中，所以在加载速度会稍微慢一点。
 
 ---
 
