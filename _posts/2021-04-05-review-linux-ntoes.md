@@ -7,6 +7,8 @@ tag:
 author: ingerchao
 ---
 
+[TOC]
+
 
 
 ### 快捷键
@@ -23,7 +25,6 @@ author: ingerchao
 - `ctrl+a`: 光标移至命令行首
 - `ctrl+e`: end, 光标移至最后一个字符
 - `ctrl+l`: clear, 清屏
-
 - `history`: 查看历史命令
 - `date`： 日期
 
@@ -354,7 +355,7 @@ scp: super copy, 使用该命令的前提就是主机成功安装 openssh-server
 scp -r 目标用户名@目标主机ip:/目标文件的绝对路径 保存到本机的绝对（相对）路径
 ```
 
-###用户管理
+### 用户管理
 
 创建用户： sudo adduser  username，adduser 本质上是一个脚本，所以用起来比较方便。用户名不可以有大写字母。 
 
@@ -662,9 +663,9 @@ $(target):$(obj)
   gcc -c $< -o $@
 ```
 
-- `$<` : 规则中的第一个依赖；
+- `$<` : 规则中的第一个依赖项；
 - `$@`: 规则中的目标；
-- `$^`: 规则中的所有依赖；
+- `$^`: 规则中的所有依赖项；
 
 > :warning: 注： 以上三个符号的规则只能在命令中使用。
 
@@ -691,7 +692,43 @@ $(target):$(obj)
 
 这样makefile看起来就更高大上了。
 
+#### Makefile 中的函数
+
+v4 版本的 makefile 对带有变量的 v3 版 makefile 进行改进，makefile 有自带的函数可以完成一些工作，且 makefile 中的所有函数都是有返回值的，如：
+
+- `src=$(wildcard ./*.c) `: 查找当前目录下的所有 .c 文件;
+
+- `obj=$(patsubst ./%.c, ./%.o, $(src))`: patsubst 是用于 **匹配替换** 的函数，将src中，指定目录下的所有后缀为 %.c 的文件都替换为 %.o；
+
+```makefile
+#obj=main.o add.o mul.o
+target=app
+# makefile 中自己维护的变量
+src=$(wildcard ./*.c) # 查找当前目录下的所有 .c 文件
+obj=$(patsubst ./%.c, ./%.o, $(src))
+CC=gcc
+CPPFLAGS = -I
+# 直接 make 时生成顶级目标
+$(target):$(obj)
+	 $(CC) $(obj) -o $(target)
+%.o:%.c
+	$(CC) -c $< -o $@
+
+# make clean: 直接执行下面的命令，不生成顶级目标
+clean:
+	# 命令前加 - 表示该命令执行失败时忽略该命令；
+	-rm $(obj) $(target)
+# make hello: 直接执行下面命令，不生成顶级目标
+hello:
+	echo "hello makefile!\n"
+```
+
+> 更多内容可以详细查看 [GNU make](https://www.gnu.org/software/make/manual/make.html) 官方文档。
+
 ---
 
 视频：[哔哩哔哩黑马](https://b23.tv/Jomal8)
 
+资料：
+
+- [GNU make 官方文档](https://www.gnu.org/software/make/manual/make.html)
