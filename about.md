@@ -90,7 +90,7 @@ Supported arguments:
 
 
 ### **[快学](https://github.com/DreamYHD/NucYiXueFinal)** `2017.6 - 2017.10`
-    
+
 `Android`
 
 - 2017 年"鑫台华杯"华北五省计算机应用大赛国赛二等奖作品；
@@ -101,7 +101,9 @@ Supported arguments:
 
 ## 科研文献
 
-* ### CJAM: Convolutional Neural Network Joint Attention Mechanism in Gait Recognition
+* ### CJAM: Convolutional Neural Network Joint Attention Mechanism in Gait Recognition 
+
+- IEICE Transcation on Information and System 已发表
 
 * ### Sewer Pipe Defects Assessment based on Automated Pipe Calibration in Single Image
 
