@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "复现：SiamMASK-Fast Online Object Tracking and Segmentation: A Unifying Approach"
 date: 2020-10-28
 author: ingerchao

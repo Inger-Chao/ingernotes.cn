@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "OpenCV: 测量物体大小"
 date: 2020-10-27 
 category: blog

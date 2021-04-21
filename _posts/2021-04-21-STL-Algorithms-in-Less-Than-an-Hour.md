@@ -1,14 +1,14 @@
 ---
+layout: post
 title: "105 STL Algorithms in Less Than an Hour"
+toc: true
 date: 2021-04-21
 category: blog
 tag: 
 - C++
 author: ingerchao
-toc: true
 ---
 
-[TOC]
 
 配套食用：[The C++ Conference bellevue 2018](https://www.youtube.com/watch?v=bFSnXNIsK4A)
 

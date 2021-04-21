@@ -1,4 +1,6 @@
 ---
+layout: post
+toc: true
 title: "Linux 基础知识Ⅰ"
 date: 2021-04-16
 category: blog
@@ -7,8 +9,6 @@ tag:
 toc: true
 author: ingerchao
 ---
-
-[TOC]
 
 配套食用：[哔哩哔哩黑马 Linux 基础教程 P1 - P98](https://b23.tv/Jomal8); 
 

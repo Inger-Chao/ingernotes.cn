@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "训练一个管道识别模型"
 date: 2020-11-16
 category: blog

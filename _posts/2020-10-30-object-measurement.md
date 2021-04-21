@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "论文：Object Distance Measurement Using a Single Camera for Robotic Applications"
 date: 2020-10-30
 author: ingerchao

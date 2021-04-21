@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Debug: Z800 3DVisor && 5DT Data Gloves in MAC"
 date: 2020-11-16
 category: blog
