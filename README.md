@@ -23,6 +23,7 @@ theme support by [sergiokopplin/indigo](https://github.com/sergiokopplin/indigo)
 - [valine_comment](https://github.com/xCss/Valine): A fast, simple & powerful comment system.
 - A search tool: find items by post title.
 - [nimo-markdown-cv](https://github.com/wodeni/nimo-markdown-cv): to show my resume.
+- [jekyll-toc](https://github.com/toshimaru/jekyll-toc): automatic generates a table of contents.
 - Mathjax support.
 - Chinese URL support.
 

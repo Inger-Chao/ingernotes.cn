@@ -22,7 +22,7 @@ layout: page
     </div>
 {% endif %}
 
-{{content}}
+{{ content | toc }}
 
 {% if site.post-advance-links contains page.category %}
     <div class="blog-navigation">
@@ -48,3 +48,4 @@ layout: page
 {% if site.valine_comment.categories contains page.category %}
     {% include valine.html %}
 {% endif %}
+

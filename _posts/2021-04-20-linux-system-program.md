@@ -4,10 +4,13 @@ date: 2021-04-20
 category: blog
 tag: 
 - Linux
+toc: true
 author: ingerchao
 ---
 
 
+
+[TOC]
 
 配套食用：[哔哩哔哩黑马 Linux 基础教程 P99 ](https://b23.tv/Jomal8); 
 
