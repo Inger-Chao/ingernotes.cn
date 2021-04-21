@@ -101,11 +101,9 @@ Supported arguments:
 
 ## 科研文献
 
-* ### CJAM: Convolutional Neural Network Joint Attention Mechanism in Gait Recognition 
+* ### CJAM: Convolutional Neural Network Joint Attention Mechanism in Gait Recognition `IEICE Transcation on Information and System 已发表`
 
-- IEICE Transcation on Information and System 已发表
-
-* ### Sewer Pipe Defects Assessment based on Automated Pipe Calibration in Single Image
+* ### Sewer Pipe Defects Assessment based on Automated Pipe Calibration in Single Image `投稿中`
 
 ## 获奖经历
 
