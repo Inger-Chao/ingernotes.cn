@@ -11,7 +11,7 @@ author: ingerchao
 
 
 
-最近几天看青春有你3，pick 了一个弟弟（孙滢皓），为了给弟弟投票写了一个小 demo。
+最近几天看青春有你3，pick 了一个弟弟，为了给弟弟投票写了一个小 demo。
 
 功能分析：records 文件中记录了今天投了的号，大概总数是 500 多条，文件内容如下所示，投票过程中将每一个已经被其他家粉丝抢投的号的缩写写在被投的后面，最后将今天已经投的号和被其他家抢投的号分成两个文件。
 
@@ -26,7 +26,7 @@ demo 的编写思路也很简单，首先按行读取文件中的每行内容，
 //  main.cpp
 //  datou_deal
 //
-//  Created by 赵琦 on 2021/4/25.
+//  Created by Inger on 2021/4/25.
 //  Copyright © 2021 inger. All rights reserved.
 //
 #include <iostream>
