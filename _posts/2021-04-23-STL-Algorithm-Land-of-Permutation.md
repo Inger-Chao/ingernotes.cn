@@ -220,9 +220,9 @@ the 5th little element in array is 4
 
 merge 和 inplace_merge<sup>[1](http://c.biancheng.net/view/568.html)</sup>: merge 是将两个序列合并成一个有序序列， inplace_merge 是将同一个序列中，两个连续有序的元素序列合并为一整个有序的序列。
 
-![merge](http://c.biancheng.net/uploads/allimg/180918/2-1P91Q5554bX.jpg)
+![merge](./../assets/images/program/cpp/2-1P91Q5554bX.jpg)
 
-![inplace_merge](http://c.biancheng.net/uploads/allimg/180918/2-1P91Q55T6422.jpg)
+![inplace_merge](./../assets/images/program/cpp/2-1P91Q55T6422.jpg)
 
 ```c++
     array<int, 10> arr = {5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
