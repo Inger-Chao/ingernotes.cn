@@ -8,8 +8,6 @@ category: blog
 author: ingerchao
 ---
 
-
-
 ### 基本语言特性
 
 #### 1. 结构化绑定（Structured Bindings）
@@ -147,8 +145,8 @@ int main() {
   
   MoreData z1{}; // all members initialize with value 0
   MoreData z2; // all members are undefined
-  MoreData z3{{3}}; // {{3, 0}, false}
-  MoreData z4{{}, true}; // {{0, 0}, true}
+  MoreData z3{{3}};
+  MoreData z4{{}, true};
 }
 ```
 
