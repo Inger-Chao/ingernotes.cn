@@ -129,6 +129,7 @@ const int* p = &D::n; // c++14: Undefined symbols for architecture x86_64: "D::n
 聚合体：**数组或者 C 风格的简单类**，简单类要求**没有用户定义的构造函数、没有私有或保护的非静态数据成员、没有虚函数**，在 C++17 之前，还要求没有继承。
 
 ```c++
+{% raw %}
 struct Data {
   int i;
   double d;
@@ -145,10 +146,12 @@ int main() {
   
   MoreData z1{}; // all members initialize with value 0
   MoreData z2; // all members are undefined
-  MoreData z3{{3}};
-  MoreData z4{{}, true};
+  MoreData z3{{3}}; // {{3, 0}, false}
+  MoreData z4{{}, true}; // {{0, 0}, true}
 }
+{% endraw %}
 ```
+
 
 - 可以跳过一些值去初始化，被跳过的成员会进行默认初始化（基础类型初始化为 0、false 或 nullptr，类会默认构造）；
 - 使用花括号和不使用花括号完全不同：
@@ -157,6 +160,7 @@ int main() {
 - 内部嵌套的初值列表将按照继承时基类声明的顺序传递给基类；
 
 ```c++
+{% raw %}
 template<typename T>
 struct D : std::string, std::complex<T>
 {
@@ -169,6 +173,7 @@ int main() {
   std::cout << static_cast<std::string>(s) << s.data << std::endl;
   std::cout << static_cast<std::complex<float>>(t) << std::endl;
 }
+{% endraw %}
 ```
 
 - c++ 17 引入 is_aggregate<> 测试一个类型是否为聚合体；
