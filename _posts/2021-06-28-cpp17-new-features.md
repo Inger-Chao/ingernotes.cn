@@ -308,11 +308,62 @@ public:
 
 c++ 11 和 14 以值或引用的方式捕获 this 指针。当对象的生命周期结束，而 lambda 的生命周期还没有结束时，就会出现问题。比如在 lambda 中 开启一个新的线程来完成某些任务。c++ 14 提供的以拷贝方式捕获 this 指针的解决方案是 `[self = *this]{ self.f(); }` ，c++ 17 的更新是：`[*this]{ f(); }`，优化了写法。
 
+#### 7. 新属性(*attributes*)
 
+- `[[nodiscard]]`鼓励编译器在某个函数的返回值未被使用时给出警告;
+  - **内存泄漏**，例如返回值中含有动态分配的内存，但并未使用；
+  - **不必要的开销**，例如由于返回值没使用而导致的一些奇怪的行为；
+- `[[maybe_unused]]`避免编译器在某个变量未被使用时发出警告;
+-  `[[fallthrough]]` 可以避免编译器在 switch 语句中某一个标签缺少 break 语句时发出警告;
 
-### New core language features with global applicability
+##### 通用属性扩展
 
-#### 1. made noexcept part of type system
+1. 属性可以用于标记命名空间；
+
+```c++
+namespace [[deprecated]] Draft {}
+```
+
+2. 属性可以用于标记枚举类型的值；
+
+```c++
+enum class City { 
+  Berlin = 0,
+  NewYork = 1,
+  Mumbai = 2,
+  Bombay [[deprecated]] = Mumbai,
+};
+```
+
+3. 对于用户自定义的属性，可以使用 using 前缀避免为每一个属性重复输入命名空间；
+
+```c++
+// until c++17
+[[MyLib::WebService, MyLib::RestService, MyLib::doc("html")]] void foo();
+
+// since c++17
+[[using MyLib: WebService, RestService, doc("html")]] void foo();
+```
+
+#### 8. 嵌套命名空间
+
+```c++
+namespace A::B::C {
+	//...
+}
+
+namespace A {
+  namespace B {
+    namespace C {
+      //...
+    }
+  }
+}
+```
+
+#### 9. 更严格的表达式求值顺序 (Stricter order of expression evaluation)
+
+#### 14. made noexcept part of type system
 
 以 `noexcept` 修饰的函数和没有`noexcept`修饰的函数是不同类型，会导致函数重载;
 
