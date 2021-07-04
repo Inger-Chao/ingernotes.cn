@@ -363,6 +363,64 @@ namespace A {
 
 #### 9. 更严格的表达式求值顺序 (Stricter order of expression evaluation)
 
+- e1 保证在 e2 前求值：
+  - e1[e2]
+  - e1.e2
+  - e1.*e2
+  - e1 -> *e2
+  - e1 << e2
+  - e1 >> e2
+- 所有的赋值运算右侧值保证会在左侧值之前求值；
+- `new Type(e)` 中保证内存分配的操作在对 e 求值之前发生。
+
+#### 10. 用整型初始化 enum 值
+
+```c++
+enum Month : char {};
+Month May{5}; // c++14 error: cannot initialize a variable of type 'Month' with an rvalue of type 'int', 17ok
+```
+
+#### 11. 修正 auto 类型的列表初始化
+
+```c++
+// cpp 11
+int x{42}; // 初始化一个int
+int y{1, 2, 3}; // ERROR
+auto a{42}; // 初始化一个std::initializer_list<int> 
+auto b{1, 2, 3}; // OK:初始化一个std::initializer_list<int>, 
+
+// cpp 17
+auto a{42}; // 初始化一个int
+auto b{1, 2, 3}; // ERROR
+```
+
+当使用 auto 进行拷贝列表初始化(使用了 =)时仍然是初始化一个 `std::initializer_list<>`:
+
+```c++
+auto c = {42}; // 仍然初始化一个std::initializer_list<int> 
+auto d = {1, 2, 3}; // 仍然OK:初始化一个std::initializer_list<int>
+```
+
+#### 12. Hexadecimal floating point literals
+
+具有十六进制基数和十进制指数的浮点文字：`0xC.68p 2`,` 0x1.P-126`。 C 从 C99 开始就支持这种语法，printf("%a") 。
+
+- 有效数字/尾数用十六进制书写；
+- 指数部分用十进制书写，表示乘以2的n次幂
+
+#### 13. UTF-8 创建字符
+
+```c++
+auto c = u8'6'; // UTF-8编码的字符6
+```
+
+在 C++17 中，u8'6' 的类型是 char，在 C++20 中可能会变为 char8_t。
+
+- u8用于单字节US­ASCII和UTF­8编码；
+- u用于两字节的UTF­16编码；
+- U用于四字节的UTF­32编码；
+- L用于没有明确编码的宽字符，可能是两个或者四个字节；
+
 #### 14. made noexcept part of type system
 
 以 `noexcept` 修饰的函数和没有`noexcept`修饰的函数是不同类型，会导致函数重载;
@@ -394,7 +452,7 @@ int main() {
 >
 > The noexcept-specification is not a part of the function type (just like [dynamic exception specification](https://en.cppreference.com/w/cpp/language/except_spec)) and can only appear as a part of a [lambda declarator](https://en.cppreference.com/w/cpp/language/lambda) or a top-level [function declarator](https://en.cppreference.com/w/cpp/language/function) when declaring functions, variables, non-static data members of type function, pointer to function, reference to function, or pointer to member function, and also when declaring a parameter or a return type in one of those declarations that in turn happens to be a pointer or reference to function. It cannot appear in a [typedef](https://en.cppreference.com/w/cpp/language/typedef) or [type alias](https://en.cppreference.com/w/cpp/language/type_alias) declaration.
 >
-> ```
+> ```c++
 > void f() noexcept; // the function f() does not throw
 > void (*fp)() noexcept(false); // fp points to a function that may throw
 > void g(void pfa() noexcept);  // g takes a pointer to function that doesn't throw
@@ -403,7 +461,115 @@ int main() {
 
 
 
+#### 15. 单参数 static_assert
 
+```c++
+#include <type_traits>
+template<typename T>
+class C {
+  static_assert(std::is_default_constructible<T>::value, "class C: elements must be default-constructible");
+  static_assert(std::is_default_constructible_v<T>); // cpp14 error, cpp17 ok
+};
+```
+
+#### 16. 预处理条件 __has_include
+
+添加了一个检查某个头文件是否可以被包含的宏：
+
+```c++
+#if __has_include(<filesystem>)
+#  include <filesystem>
+#  define HAS_FILESYSTEM 1
+#elif __has_include(<experimental/filesystem>)
+#  include <experimental/filesystem>
+#  define HAS_FILESYSTEM 1
+#  define FILESYSTEM_IS_EXPERIMENTAL 1
+#elif __has_include("filesystem.hpp")
+#  include "filesystem.hpp"
+#  define HAS_FILESYSTEM 1
+#  define FILESYSTEM_IS_EXPERIMENTAL 1
+#else
+#  define HAS_FILESYSTEM 0
+#endif
+```
+
+### 模版相关
+
+#### 17. Class template argument deduction
+
+```c++
+// until cpp17
+std::complex<double> c{5.1, 3.3};
+std::mutex mx;
+std::lock_guard<std::mutex> lg(mx);
+
+// since cpp17
+std::complex c{5.1, 3.3}; // OK:推导出std::complex<double>
+std::mutex mx;
+std::lock_guard lg{mx};     // OK：推导出std::lock_guard<std::mutex>
+// containner 
+std::vector v1 {1, 2, 3};            // OK：推导出std::vector<int>
+std::vector v2 {"hello", "world"};   // OK：推导出std::vector<const char*>
+```
+
+#### 18. `template <auto>`
+
+```c++
+template <auto X> 
+struct constant {
+  static constexpr auto value = X; 
+};
+
+enum TestEnum { VAL1, VAL2, };
+
+int main() {
+  // cpp 14: error: 'auto' not allowed in template parameter until C++17
+  constant<5> b1;   // OK: template parameter type is int
+  constant<'a'> b2; // OK: template parameter type is char
+  constant<VAL1> b3; // decltype(X) == TestEnum
+  return 0;
+}
+```
+
+#### 19. 折叠表达式(Fold expression)
+
+```c++
+template<typename... T>
+auto foldSum(T... arg) {
+  return (... + arg);
+}
+
+int main() {
+  std::cout << foldSum(1, 2, 3, 4) << std::endl;
+  return 0;
+}
+```
+
+#### 20. constexpr if
+
+```c++
+template <typename T>
+std::string asString(T x)
+{
+    if constexpr(std::is_same_v<T, std::string>) {
+        return x;                   // 如果T不能自动转换为string该语句将无效
+    }
+    else if constexpr(std::is_arithmetic_v<T>) {
+        return std::to_string(x);   // 如果T不是数字类型该语句将无效
+    }
+    else {
+        return std::string(x);      // 如果不能转换为string该语句将无效
+    }
+}
+```
+
+### 部分其他特性
+
+- std::byte: 在 `<cstddef>` 中定义了一个新的字节类型，代表内存的最小单位。
+- std::any: 一种在保证类型安全的基础上还能改变自身类型的值类型；
+- std::string_view: 一个 string_view 对象可以看作是 string 的引用；
+- std::optional<> 模拟了一个可以为空的任意类型的实例。
+- std::variant<>：A value of `variant<A, B, C>` contains *one of* an `A`, a `B`, or a `C` at any one time.
 
 ### 移除或弃用的特性
 
@@ -413,13 +579,17 @@ int main() {
 - `??!` 
 - register: 依然是关键字，但不具有任何语义；
 - 不再支持 bool 类型的 ++ 操作：bool++, ++bool;
-- iostream 中被弃用的一些别名
+- iostream 中被弃用的一些别名；
+- 动态异常声明 throw(A, B, C)；
+- function<> 的 allocator 支持；
 
 #### Depracated
 
 - 弃用静态 constexpr 类成员的重新声明；
-
-
+- 弃用 c 库头文件，比如 `<ccomplex>` 等等；
+- result_of
+- shared_ptr::unique
+- 暂时弃用 `memory_order_consume` ;
 
 
 -------
