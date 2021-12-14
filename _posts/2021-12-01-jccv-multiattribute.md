@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "相关论文阅读：管道缺陷检测与评估"
+title: "相关论文阅读：管道缺陷评估中的多属性效用理论部署"
 description: "下水道缺陷评估中的多属性效用理论部署"
 date: 2021-12-01
 author: ingerchao
