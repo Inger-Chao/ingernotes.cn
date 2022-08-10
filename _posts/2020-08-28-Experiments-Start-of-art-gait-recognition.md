@@ -107,7 +107,6 @@ description: 审稿意见中给的借鉴论文
 ### 踩坑
 
 1. pytorch 安装检查是否可用返回 False【ref 4】：
-2. 
 
 ----
 
