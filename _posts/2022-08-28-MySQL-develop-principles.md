@@ -97,3 +97,54 @@ MySQL 的三类数值类型有：
 
 #### 2. 将字符转化为数字
 
+相比字符串型索引，数字型索引更高效、查询更快、占用空间更小，例如，将 IP 存储为 INT，而不是 CHAT(15)，然后用 INET_ATON() 和 INET_NTOA() 实现 IP 字符串和数值之间的转换。
+
+#### 3. 优先使用 ENUM 或 SET
+
+对于枚举型数据，推荐优先使用 ENUM 或 SET，主要适用于以下场景：
+
+1. 字符串型枚举；
+2. 枚举值已知且有限
+
+ENUM 占用 1 Byte，转为数值运算；SET 视节点而定，最多占用 8 Byte。
+
+注：比较时需要加单引号。
+
+```sql
+`sex` enum('F', 'M') COMMENT '性别',
+`c1` enum('0','1','2','3') COMMENT '列'
+```
+
+#### 4. 避免使用 NULL 字段
+
+NULL 字段的弊端：
+
+1. 很难进行查询优化；
+2. NULL 列加索引需要额外空间；
+3. 含 NULL 复合索引无效；
+
+因此，建议在数据库表字段设计的时候尽量加上 `NOT NULL DEFAULT ''`  或者`NOT NULL DEFAULT 0`。
+
+#### 5. 少用并拆分 TEXT/BLOB
+
+`TEXT`数据不存储在数据库服务器的内存中，因此，每当查询`TEXT`数据时，MySQL都必须从磁盘读取它，这与`CHAR`和`VARCHAR`相比要慢得多。
+
+TEXT 最多可以存储 64KB 数据量，相当于 VARCHAR(65535)。
+
+如果业务必须要用到 TEXT 数据类型，建议将 TEXT 列拆分到单独的表，在该表中只存储 text 列的主键。
+
+#### 6. 不在数据库里存图片
+
+这不是显而易见吗？图片的大小比其路径大的多得多，保存图片路径即可。
+
+将图片按照固定规则分配到多个目录中去，进行保存和查找。
+
+
+
+----
+
+References:
+
+1. [MySQL数据库开发的36条原则](https://www.yiibai.com/mysql/text.html)
+2. [MySQL Text 类型](https://www.yiibai.com/mysql/text.html)
+
