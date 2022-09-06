@@ -1,4 +1,14 @@
-## MySQL 开发的 36 条规范
+---
+layout: post
+title: "MySQL 开发规范"
+date: 2022-08-11
+author: ingerchao
+category: blog
+tag:
+- MySQL
+---
+
+[toc]
 
 ### 核心原则
 
@@ -223,7 +233,87 @@ WHERE cellPhone='13800138000';
 
 #### 5. 避免负向查询和 % 前缀的模糊查询
 
+- NOT、!=、<>、!<、!>、NOT EXISTS、NOT IN、NOT LIKE等判断可能会造成索引失效；
+- % 前缀会导致索引失效和全表扫描。
 
+#### 6. 减少 COUNT(*)
+
+> COUNT(*)对表中行的数目进行计数，不管表列中包含的是空 值(NULL)还是非空值。
+>
+> COUNT(column) 对特定列中具有值的行进行计数，忽略 NULL值。
+
+COUNT(*) 开销大，能不用尽量不用。
+
+#### 7. LIMIT 高效分页
+
+```mysql
+SELECT _column,_column FROM _table [WHERE Clause] [LIMIT N][OFFSET M]
+```
+
+- limit N: 返回 N 条记录；
+- offset M：跳过 M 条记录，默认 M=0，单独使用不起作用；
+- LIMIT N,M == LIMIT M OFFSET N: 从第N条记录开始，返回 M 条记录；
+
+N 越大越慢，推荐分页方式：
+
+```mysql
+SELECT * FROM table WHERE id>=123 LIMIT 11;
+```
+
+#### 8. 用 UNION ALL 而非 UNION
+
+UNION 有去重开销。
+
+#### 9. 分解联结保证高并发
+
+高并发数据库不建议进行两个表以上的 JOIN 查询，适当分解联结保证高并发。
+
+#### 10. 同数据类型的列值比较
+
+数值列与字符类型比较：同时转换为双精度进行对比；
+
+字符列与数值类型比较：字符列整列转数值，不会使用索引查询。
+
+> Strings are automatically converted to numbers and numbers to strings as necessary.
+>
+> eg. 'abc' 转数值是 0，'1abc'转数值是1。
+
+#### 11. Load data 批量导入数据
+
+批量数据用 Load data 命令导入更快，相比单行 insert，不需要每次刷新缓存。
+
+#### 12. 打散大批量更新
+
+- 大批量更新尽量凌晨操作，避开高峰；
+- 白天上线默认为 100条/秒；
+
+#### 13. Know Every SQL
+
+作为 DBA 和数据库开发人员，必须对数据库的每条 SQL 都非常了解。
+
+### 约定类原则
+
+#### 1. 隔离线上、线下环境
+
+构建数据库的生态环境，确保不同角色的数据库环境不同。
+
+#### 2. 永远不在程序端显式加锁
+
+- 外部锁对数据库不可控；
+- 高并发时是灾难；
+- 极难调试和排查；
+
+对于类似并发扣款等一致性问题，采用事务处理，提交前进行二次校验冲突。
+
+#### 3. 统一字符集为 UTF8
+
+避免乱码
+
+#### 4. 统一命名规范
+
+- 库、表名称统一用小写；
+- 库名用缩写，长度尽量在 2-7 个字母之间；
+- 避免保留字命名：例如 GROUP、DROP、LIMIT 等。
 
 ----
 
