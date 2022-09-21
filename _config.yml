@@ -43,7 +43,7 @@ valine_comment:
     # app_key
     leancloud_appkey: oV4zbzmWrpAWp0T4MwIi9PB3
     # placeholde
-    placeholder: “ヾﾉ≧∀≦)o不要只是浏览，和作者互动吧！"
+    placeholder: “你觉得怎么样？"
     pageSize: 10
     categories: [blog, projects] # only show valine for posts that have these categories
 
@@ -73,7 +73,7 @@ email: ingerchao@outlook.com
 authors:
     ingerchao:
         name: Inger Chao（赵琦）
-        bio: CS 研二在读
+        bio: 我坐在月亮下思考
         external-image: false
         picture: assets/images/profile.jpg
 
@@ -90,7 +90,7 @@ width: normal
 projects: true
 
 # if you don't need "about" or "blog", comment them out below
-about: true
+about: false
 blog: true
 
 # do you want to show the "read time" of the posts?
@@ -106,7 +106,7 @@ related: true
 post-advance-links: [blog, projects]
 
 # show author block at the end of a post ?
-show-author: true
+show-author: false
 
 # do you want some animations?
 animation: true
