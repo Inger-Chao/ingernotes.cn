@@ -8,8 +8,6 @@ tag:
 - Distributed System
 ---
 
-
-
 ## Zookeeper: 无需等待的互联网规模协调系统
 
 Zookeeper 是什么？动物园管理者？一图胜千言。Zookeeper 是由雅虎研发的顶层软件项目，为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册。
@@ -18,11 +16,11 @@ Zookeeper 是什么？动物园管理者？一图胜千言。Zookeeper 是由雅
 
 目前，分布式应用往往是由多个独立的程序运行在多个机器上的，开发人员必须要处理协调逻辑和应用程序本身的逻辑。
 
-![image-20221108153726865](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-question-1.png)
+![image-20221108153726865](./../\assets\images\program\backend\zookeeper-question-1.png)
 
-![image-20221108153758367](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-question-2.png)
+![image-20221108153758367](./../\assets\images\program\backend\zookeeper-question-2.png)
 
-![image-20221108153824934](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-question-3.png)
+![image-20221108153824934](./../\assets\images\program\backend\zookeeper-question-3.png)
 
 具体来说，需要为每个特定任务都开发一个协调逻辑：
 
@@ -97,25 +95,25 @@ FIFO 客户端顺序：来自给定客户端的所有请求都按照客户端发
 
 **2. 组成员（Group Membership）**
 
-![image-20221108175433393](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-question-group-memberships.png)
+![image-20221108175433393](./../\assets\images\program\backend\zookeeper-question-group-memberships.png)
 
 **3. 简单的锁（Simple Locks）**
 
 一个应用程序中的对象如何通过锁公用一个数据源？
 
-![image-20221108175225762](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-simple-locks.png)
+![image-20221108175225762](./../\assets\images\program\backend\zookeeper-simple-locks.png)
 
 **4. 没有羊群效应的简单锁（Simple Locks without Herd Effect）**
 
 > Herd Effect 注：在计算机科学中，当事件发生时，大量等待事件的进程或线程被唤醒，但只有一个进程能够处理该事件时，就会出现从众问题。 当进程唤醒时，它们将各自尝试处理该事件，但只有一个会获胜。
 
-![image-20221108193034660](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-simple-locks-without-herd-effect.png)
+![image-20221108193034660](./../\assets\images\program\backend\zookeeper-simple-locks-without-herd-effect.png)
 
 **5. 读/写锁**
 
-![image-20221108193220354](E:\documents\notes\ingernotes.cn\assets\images\program\backend\zookeeper-simple-read-write-locks.png)
+![image-20221108193220354](./../\assets\images\program\backend\zookeeper-simple-read-write-locks.png)
 
-![image-20221108200009555](E:\documents\notes\ingernotes.cn\assets\images\program\backend\read-write-lock.png)
+![image-20221108200009555](./../\assets\images\program\backend\read-write-lock.png)
 
 吞吐量：设置250个客户端，每个客户端至少又 100 个未完成的请求（对1k数据的读或写）。
 
