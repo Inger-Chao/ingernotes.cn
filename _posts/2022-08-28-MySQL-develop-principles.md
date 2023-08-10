@@ -8,7 +8,7 @@ tag:
 - MySQL
 ---
 
-[toc]
+{:toc}
 
 ### 核心原则
 

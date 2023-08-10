@@ -43,7 +43,7 @@ valine_comment:
     # app_key
     leancloud_appkey: oV4zbzmWrpAWp0T4MwIi9PB3
     # placeholde
-    placeholder: “你觉得怎么样？"
+    placeholder: "在这里留下评论吧"
     pageSize: 10
     categories: [blog, projects] # only show valine for posts that have these categories
 
