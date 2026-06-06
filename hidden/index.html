@@ -1,0 +1,14 @@
+---
+layout: page
+title: Hidden
+---
+<section class="list">
+	{% assign hidden_posts = site.posts | where: "hidden", true %}
+	{% if hidden_posts.size == 0 %}
+		<p class="text-center">暂无隐藏文章</p>
+	{% else %}
+		{% for post in hidden_posts %}
+			{% include blog-post.html %}
+		{% endfor %}
+	{% endif %}
+</section>
