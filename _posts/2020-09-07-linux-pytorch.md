@@ -2,10 +2,11 @@
 title: torch.cuda.is_available()结果为false
 layout: post
 date: 2020-09-07
-tag: 
-- Deep Learning
-- Linux
 category: blog
+tag:
+- deep-learning
+- Linux
+
 author: ingerchao
 ---
 

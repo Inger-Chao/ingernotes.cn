@@ -2,10 +2,11 @@
 title: "数据库系统设计：宿舍管理系统"
 layout: post
 date: 2016-06-16
+category: projects
 tag:
 - MySQL
-- java
-category: projects
+- Java
+
 projects: true
 author: ingerchao
 ---

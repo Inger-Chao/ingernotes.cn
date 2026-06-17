@@ -2,7 +2,7 @@
 title: 将 jekyll、hexo 博客的 .md 文件批量上传至基于 wordpress 的博客
 layout: post
 tag:
--  wordpress
+- WordPress
 date: 2020-09-09
 author: ingerchao
 category: blog

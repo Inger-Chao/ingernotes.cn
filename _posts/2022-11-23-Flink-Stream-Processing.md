@@ -7,9 +7,9 @@ toc: true
 category: blog
 tag:
 - Flink
-- 流处理
-- 大数据
-- 实时计算
+- distributed-system
+
+
 ---
 
 ## 什么是 Flink

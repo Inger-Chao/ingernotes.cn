@@ -3,7 +3,7 @@ title: "计算机存储系统-CPU-Cache-主存-辅助存储器"
 layout: post
 date: 2018-11-30 
 tag:
-- CS Notes
+- cs-notes
 category: blog
 author: ingerchao
 description: notes of computer memory systeml

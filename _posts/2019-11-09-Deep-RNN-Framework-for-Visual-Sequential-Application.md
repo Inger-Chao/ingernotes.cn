@@ -2,10 +2,11 @@
 title: "论文阅读笔记：Deep RNN Framework for Visual Sequential Application"
 layout: post
 date: 2019-11-09
-tag:
-- Paper
-- Computer Vision
 category: blog
+tag:
+- paper
+- computer-vision
+
 author: ingerchao
 ---
 

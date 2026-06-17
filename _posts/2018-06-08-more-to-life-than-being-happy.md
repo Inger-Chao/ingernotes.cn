@@ -2,7 +2,7 @@
 title: "There is more to life than being happy."
 date: 2018-06-08 14:23
 tag: 
-- English
+- english
 layout: post
 category: blog
 ---

@@ -3,7 +3,7 @@ title: "考研复习之操作系统"
 layout: post
 date: 2018-11-17 22:48
 tag:
-- CS Notes
+- cs-notes
 category: blog
 author: ingerchao
 description: notes of operating system

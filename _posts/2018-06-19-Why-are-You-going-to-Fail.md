@@ -2,7 +2,7 @@
 title: "Why are you going to Fail?"
 date: 2018-06-19 22:03
 tag: 
-- English
+- english
 layout: post
 category: blog
 ---

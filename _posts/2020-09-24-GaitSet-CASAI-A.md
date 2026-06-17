@@ -4,7 +4,7 @@ date: 2020-09-24 11:13
 category: blog
 layout: post
 tag: 
-- Deep Learning
+- deep-learning
 author: ingerchao
 ---
 

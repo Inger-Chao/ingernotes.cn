@@ -2,7 +2,7 @@
 title: "Writing Material: Time Management"
 date: 2018-06-06 11:58
 tag: 
-- English
+- english
 layout: post
 category: blog
 ---

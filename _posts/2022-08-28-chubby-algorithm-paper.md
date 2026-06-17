@@ -5,7 +5,7 @@ date: 2022-09-21
 author: ingerchao
 category: blog
 tag:
-- Distributed System
+- distributed-system
 ---
 
 ### Chubby Algorithm -- Mike Burrows, Google Inc. (2006)

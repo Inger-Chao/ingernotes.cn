@@ -3,7 +3,7 @@ title: "论文阅读笔记：Multi-task GANs for View-Specific Feature Learning 
 layout: post
 date: 2020-09-03
 tag: 
-- Paper
+- paper
 category: blog
 author: ingerchao
 description: 利用 GAN 完成特定角度下的步态识别任务

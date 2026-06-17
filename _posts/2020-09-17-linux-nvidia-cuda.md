@@ -2,10 +2,11 @@
 title: "服务器配置 pytorch 环境"
 layout: post
 date: 2020-09-17 11:11
-tag: 
-- Deep Learning
-- Linux
 category: blog
+tag:
+- deep-learning
+- Linux
+
 author: ingerchao
 ---
 

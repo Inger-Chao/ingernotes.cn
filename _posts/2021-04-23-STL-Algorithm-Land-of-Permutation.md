@@ -4,9 +4,10 @@ toc: true
 title: "STL Algorithm: Land of Permutation"
 date: 2021-04-23
 category: blog
-tag: 
+tag:
 - C++
 - STL
+
 author: ingerchao
 ---
 

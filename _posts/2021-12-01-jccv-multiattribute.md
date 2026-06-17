@@ -6,7 +6,7 @@ date: 2021-12-01
 author: ingerchao
 category: blog
 tag:
-- Paper
+- paper
 ---
 
 ## 论文：Multiattribute Utility Theory Deployment in Sewer Defects Assessment

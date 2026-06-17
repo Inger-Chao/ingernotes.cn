@@ -3,8 +3,9 @@ title: "GaitSet 复现"
 layout: post
 category: blog
 tag:
-- Deep Learning
-- Paper
+- deep-learning
+- paper
+
 date: 2020-09-17 16:46
 author: ingerchao
 ---

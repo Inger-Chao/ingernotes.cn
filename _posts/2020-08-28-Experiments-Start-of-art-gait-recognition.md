@@ -3,7 +3,7 @@ title: "Experiments: Start-of-art gait recognition"
 layout: post
 date: 2020-08-28
 tag: 
-- Paper
+- paper
 category: blog
 auto: ingerchao
 description: 审稿意见中给的借鉴论文

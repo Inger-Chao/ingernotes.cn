@@ -4,7 +4,7 @@ layout: post
 date: 2020-9-14 10:06
 category: blog
 tag: 
-- opencv
+- OpenCV
 author: ingerchao
 ---
 

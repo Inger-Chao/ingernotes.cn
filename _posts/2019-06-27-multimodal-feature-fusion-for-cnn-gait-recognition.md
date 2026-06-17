@@ -3,7 +3,7 @@ title: "论文 | 基于CNN的步态识别的多模态特征融合：经验比较
 layout: post
 date: 2019-06-27 13:22
 tag:
-- Paper
+- paper
 category: blog
 author: ingerchao
 description: The notes of paper reading

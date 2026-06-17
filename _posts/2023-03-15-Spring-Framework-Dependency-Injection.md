@@ -8,9 +8,8 @@ category: blog
 tag:
 - Spring
 - Java
-- 依赖注入
-- 控制反转
-- IoC
+
+
 ---
 
 ## 引言

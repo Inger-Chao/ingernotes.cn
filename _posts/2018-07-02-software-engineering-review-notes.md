@@ -3,7 +3,7 @@ title: "软件工程复习笔记"
 layout: post
 date: 2018-07-02 19:12
 tag:
-- Software
+- software
 category: blog
 author: ingerchao
 description: The notes of software engineering

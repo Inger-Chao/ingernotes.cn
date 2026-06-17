@@ -5,7 +5,7 @@ date: 2023-05-02
 author: ingerchao
 category: blog
 tag: 
-- Software
+- software
 ---
 
 ### 1. 音频相关概念

@@ -2,13 +2,14 @@
 title: "EI-Market: 采用 RESTful 架构的Web系统"
 layout: post
 date: 2018-11-13
-tag:
-- mysql
-- java
-- spring boot
-- vue 
-- web
 category: projects
+tag:
+- MySQL
+- Java
+- Spring Boot
+- vue
+- web
+
 projects: true
 author: ingerchao
 ---

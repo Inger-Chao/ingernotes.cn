@@ -8,7 +8,8 @@ category: blog
 tag:
 - Spring
 - Java
-- 配置管理
+
+
 ---
 
 ## 背景

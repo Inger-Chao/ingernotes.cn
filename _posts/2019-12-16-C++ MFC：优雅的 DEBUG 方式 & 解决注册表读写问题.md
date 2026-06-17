@@ -2,10 +2,11 @@
 title: "C++ MFC：优雅的 DEBUG 方式 & 解决注册表读写问题"
 layout: post
 date: 2019-12-16
+category: blog
 tag:
 - C++
-- Debug
-category: blog
+- debug
+
 author: ingerchao
 ---
 

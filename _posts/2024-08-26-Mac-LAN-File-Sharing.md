@@ -7,10 +7,9 @@ toc: true
 category: blog
 tag:
 - Mac
-- 局域网
-- 文件共享
-- LocalSend
-- 技巧
+- software
+
+
 ---
 
 ## 背景

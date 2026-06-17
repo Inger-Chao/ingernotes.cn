@@ -2,11 +2,13 @@
 title: "TypeScript 代码规范中的几个点"
 layout: post
 category: blog
-author: ingerchao
-date: 2021-06-07
-tag: 
+tag:
 - NodeJS
 - ESLint
+
+author: ingerchao
+date: 2021-06-07
+
 ---
 
 

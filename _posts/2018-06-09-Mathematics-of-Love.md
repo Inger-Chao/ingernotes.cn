@@ -2,7 +2,7 @@
 title: "The Mathematics of Love"
 date: 2018-06-09 14:23
 tag: 
-- English
+- english
 layout: post
 category: blog
 ---

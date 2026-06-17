@@ -5,7 +5,7 @@ date: 2022-11-07
 author: ingerchao
 category: blog
 tag:
-- Distributed System
+- distributed-system
 ---
 
 ## Zookeeper: 无需等待的互联网规模协调系统

@@ -2,10 +2,11 @@
 title: "论文阅读笔记：面积计算相关"
 layout: post
 date: 2020-08-24
-tag:
-- Paper
-- Image Processing
 category: blog
+tag:
+- paper
+- image-processing
+
 author: ingerchao
 description: The progress of research.
 ---

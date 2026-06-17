@@ -3,7 +3,7 @@ title: "论文粗读|Past, Present, and Future of SLAM"
 layout: post
 date: 2019-06-24
 tag: 
-- Paper Reading Notes
+- paper
 category: blog
 author: ingerchao
 description: The notes of mac using

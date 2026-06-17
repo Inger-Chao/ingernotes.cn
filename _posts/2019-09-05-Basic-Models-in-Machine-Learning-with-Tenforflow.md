@@ -2,10 +2,11 @@
 title: "Basic Models in Machine Learning with Tenforflow "
 layout: post
 date: 2019-09-05
-tag:
-- Machine Learning
-- Tensorflow
 category: blog
+tag:
+- machine-learning
+- TensorFlow
+
 author: ingerchao
 ---
 

@@ -3,7 +3,7 @@ title: "考研复习之计算机网络"
 layout: post
 date: 2018-11-21 22:48
 tag:
-- CS Notes
+- cs-notes
 category: blog
 author: ingerchao
 description: notes of computer network

@@ -2,10 +2,11 @@
 title: "论文阅读笔记：关于步态识别的几篇论文"
 layout: post
 date: 2020-06-25
-tag:
-- Paper
-- Computer Vision
 category: blog
+tag:
+- paper
+- computer-vision
+
 author: ingerchao
 ---
 

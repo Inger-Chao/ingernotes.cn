@@ -2,7 +2,7 @@
 title: "The Surprising Habits of Original Ideas"
 date: 2018-06-26 14:23
 tag: 
-- English
+- english
 layout: post
 category: blog
 ---

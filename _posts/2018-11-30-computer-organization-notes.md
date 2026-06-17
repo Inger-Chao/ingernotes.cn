@@ -3,7 +3,7 @@ title: "考研复习之计算机组成原理"
 layout: post
 date: 2018-11-30 22:48
 tag:
-- CS Notes
+- cs-notes
 category: blog
 author: ingerchao
 description: notes of conputer organization
