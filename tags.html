@@ -5,15 +5,68 @@ title: Tags
 <section class="list">
     <h1 class="title">Tags</h1>
 
+    {% comment %}
+    Calculate tag frequency levels using logarithmic distribution
+    {% endcomment %}
+    {% assign tag_counts = '' | split: '' %}
+    {% for tag in site.tags %}
+        {% assign count = tag[1].size %}
+        {% assign tag_counts = tag_counts | push: count %}
+    {% endfor %}
+
+    {% assign sorted_counts = tag_counts | sort %}
+    {% assign min_count = sorted_counts | first %}
+    {% assign max_count = sorted_counts | last %}
+
+    {% comment %}
+    Calculate log interval for 5 levels
+    {% endcomment %}
+    {% assign log_min = min_count | times: 1.0 | log %}
+    {% assign log_max = max_count | times: 1.0 | log %}
+    {% assign log_range = log_max | minus: log_min %}
+    {% assign interval = log_range | divided_by: 5.0 %}
+
     {% assign tags_list = site.tags %}
 
     {% if tags_list.first[0] == null %}
         {% for tag in tags_list %}
-            <a class="item" href="#{{ tag | slugify }}">{{ tag }}</a>
+            {% assign tag_name = tag %}
+            {% assign count = site.tags[tag_name].size %}
+
+            {% comment %}
+            Calculate color level based on logarithmic distribution
+            {% endcomment %}
+            {% if count <= min_count %}
+                {% assign color_level = 1 %}
+            {% elsif count >= max_count %}
+                {% assign color_level = 5 %}
+            {% else %}
+                {% assign log_count = count | times: 1.0 | log %}
+                {% assign relative_pos = log_count | minus: log_min | divided_by: interval %}
+                {% assign color_level = relative_pos | floor | plus: 1 %}
+            {% endif %}
+
+            <a class="item tag-level-{{ color_level }}" href="#{{ tag_name | slugify }}">{{ tag_name }}</a>
         {% endfor %}
     {% else %}
         {% for tag in tags_list %}
-            <a class="item" href="#{{ tag[0] | slugify }}">{{ tag[0] }}</a>
+            {% assign tag_name = tag[0] %}
+            {% assign count = tag[1].size %}
+
+            {% comment %}
+            Calculate color level based on logarithmic distribution
+            {% endcomment %}
+            {% if count <= min_count %}
+                {% assign color_level = 1 %}
+            {% elsif count >= max_count %}
+                {% assign color_level = 5 %}
+            {% else %}
+                {% assign log_count = count | times: 1.0 | log %}
+                {% assign relative_pos = log_count | minus: log_min | divided_by: interval %}
+                {% assign color_level = relative_pos | floor | plus: 1 %}
+            {% endif %}
+
+            <a class="item tag-level-{{ color_level }}" href="#{{ tag_name | slugify }}">{{ tag_name }}</a>
         {% endfor %}
     {% endif %}
 

@@ -5,8 +5,8 @@ date: 2018-07-12 22:48
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- English
-- Extra
+- english
+- extra
 category: blog
 author: ingerchao
 description: Ted notes for English Writting
